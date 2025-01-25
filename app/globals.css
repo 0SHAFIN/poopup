@@ -3,17 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff; /* Light background */
+  --foreground: #000000; /* Dark text */
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    --background: #ffffff; /* Light background */
+    --foreground: #000000; /* Dark text */
+  }  
 }
 
+:root {
+  --first-slide-bg: #fcf3e4;
+  --first-slide-text: #24130f;
+  --button-bg: #ffb54c; /* Dark button */
+  --button-text:#65372a; /* Light text */
+  --card-light-bg:#f9dfb9;
+}
 body {
   color: var(--foreground);
   background: var(--background);
