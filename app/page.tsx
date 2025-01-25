@@ -108,13 +108,13 @@ export default function Home() {
             </p>
             <div className="flex justify-center">
               <div className="flex w-fit rounded-full bg-[var(--card-light-bg)] ">
-                  <Image src="/icon/person.jpg" width={80} height={80} className="rounded-full" alt="Person Image"/>
+                  <Image src="/icon/person.jpg" width={60} height={60} className="rounded-full" alt="Person Image"/>
                   <div>
-                    <div className="flex mr-20 mt-3 mb-1 mx-5">
+                    <div className="flex mr-20 mt-1 mb-1 mx-5">
                       <p className="px-4 text-lg">This is so clever</p>
                       <Image className="" src="/icon/clap.png" width={20} height={20} alt="Clap Icon"/>
                     </div>
-                    <p className="px-7 text-sm">Guillermo R. -Vercel CEO</p>
+                    <p className="px-7 text-sm mb-2">Guillermo R. -Vercel CEO</p>
                   </div>
               </div>
             </div>
@@ -122,8 +122,39 @@ export default function Home() {
           </span>
         </div>
       </div>
-      <div className="slide h-screen bg-blue-500">
-        <h1>Second Slide</h1>
+      <div className="slide p-40 bg-[var(--button-text)]">
+        <div className="flex justify-center">
+          <p className="text-5xl font-extrabold text-[var(--card-light-bg)]">97% of visitors aren't ready to buy</p>
+        </div>
+
+        <div className="flex justify-center">
+          <p className="text-lg text-center mt-8 text-[var(--card-light-bg)]">
+            All the time and money spent on ads, SEO, and content <br></br> 
+          marketing goes to waste. Potential customers leave and never<br></br> 
+          come back.</p>
+        </div>
+
+        <div className="flex justify-center mt-28">
+            <div className="mx-20">
+              <p className="text-center text-4xl">🫣</p>
+              <p className="text-center text-lg text-bold text-[var(--card-light-bg)]">Potential customer is <br></br> interested</p>
+            </div>
+
+            <div className="mx-20">
+              <p className="text-center text-4xl">😕</p>
+              <p className="text-center text-lg text-bold text-[var(--card-light-bg)]">Doesn't find a reason to <br></br> buy <u>right now</u></p>
+            </div>
+
+            <div className="mx-20">
+              <p className="text-center text-4xl">😬</p>
+              <p className="text-center text-lg text-bold text-[var(--card-light-bg)]">Leaves and never <br></br> comes back</p>
+            </div>
+        </div>
+
+      </div>
+
+      {/* slide 3 */}
+      <div className="slide p-40 bg-[var(--first-slide-bg)]">
       </div>
     </div>
   );
