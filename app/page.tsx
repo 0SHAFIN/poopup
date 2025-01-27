@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faArrowRight, faAngleUp, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faArrowRight, faAngleUp, faPlus , faMinus } from "@fortawesome/free-solid-svg-icons";
 import { on } from "events";
 
 export default function Home() {
@@ -426,7 +426,7 @@ export default function Home() {
                 <hr className="text-center border-1 border-gray-500 mt-10" />
                 <div className="flex justify-between mt-6">
                   <p className={`text-xl font-bold ${ques1?"text-[var(--ocean-green)]":""}`}>Is it a subscription?</p>
-                  <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+                  <FontAwesomeIcon icon={!ques1?faPlus:faMinus} className="text-xl mt-1 " />
                 </div>
               </div>
             </div>
@@ -443,7 +443,7 @@ export default function Home() {
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques2?"text-[var(--ocean-green)]":""}`}>Is it compatible with?...</p>
-                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+                <FontAwesomeIcon icon={!ques2?faPlus:faMinus} className="text-xl mt-1 " />
               </div>
             </div>
 
@@ -461,7 +461,7 @@ export default function Home() {
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques3?"text-[var(--ocean-green)]":""}`}>Do i need to code?</p>
-                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+                <FontAwesomeIcon icon={!ques3?faPlus:faMinus} className="text-xl mt-1 " />
               </div>
             </div>
 
@@ -479,7 +479,7 @@ export default function Home() {
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques4?"text-[var(--ocean-green)]":""}`}>Does Poopup work on mobile?</p>
-                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+                <FontAwesomeIcon icon={!ques4?faPlus:faMinus} className="text-xl mt-1 " />
               </div>
             </div>
 
@@ -495,7 +495,7 @@ export default function Home() {
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques5?"text-[var(--ocean-green)]":""}`}>What can I customize?</p>
-                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+                <FontAwesomeIcon icon={!ques5?faPlus:faMinus} className="text-xl mt-1 " />
               </div>
             </div>
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques5 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
