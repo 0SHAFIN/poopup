@@ -12,6 +12,12 @@ export default function Home() {
   const [isCollapsed2, setIsCollapsed2] = useState(false);
   const [isCollapsed3, setIsCollapsed3] = useState(false);
 
+  const [ques1, setQues1] = useState(false);
+  const [ques2, setQues2] = useState(false);
+  const [ques3, setQues3] = useState(false);
+  const [ques4, setQues4] = useState(false);
+  const [ques5, setQues5] = useState(false);
+
   const handleToogle1 = () => {
     setIsCollapsed(!isCollapsed1);
   }
@@ -21,6 +27,23 @@ export default function Home() {
   const handleToogle3 = () => {
     setIsCollapsed3(!isCollapsed3);
   }
+
+  const handleQues1 = () => {
+    setQues1(!ques1);
+  }
+  const handleQues2 = () => {
+    setQues2(!ques2);
+  }
+  const handleQues3 = () => {
+    setQues3(!ques3);
+  }
+  const handleQues4 = () => {
+    setQues4(!ques4);
+  }
+  const handleQues5 = () => {
+    setQues5(!ques5);
+  }
+
 
   return (
     <div>
@@ -313,8 +336,9 @@ export default function Home() {
 
       {/* slide 6 */}
       <div className="slide p-40 bg-[var(--usecase-card)]">
-        <p className="text-center text-lg mb-10">Pricing</p>
-        <p className="text-center text-5xl font-extrabold text-[var(--first-slide-text)] mb-10">Make your product a non-brainer purchase</p>
+        <p className="text-center text-lg mb-8 text-[var(--ocean-green)]
+        ">Pricing</p>
+        <p className="text-center text-5xl font-extrabold text-[var(--first-slide-text)] mb-36">Make your product a non-brainer purchase</p>
         <div className="flex justify-center">
 
           <div className="bg-[var(--first-slide-bg)] w-1/3 p-10 rounded-3xl mr-10">
@@ -349,14 +373,12 @@ export default function Home() {
           </div>
 
           <div className="relative bg-[var(--first-slide-bg)] w-1/3 p-10 rounded-3xl border-2 border-[var(--button-bg)]">
-            <div className="abolute -top-10 right-10 bg-[var(--button-bg)] h-fit p-1 px-2 rounded-xl text-sm font-bold text-[var(--button-text)]">POPULER</div>
-
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[var(--button-bg)] h-fit w-fit p-1 px-2 rounded-xl text-sm font-bold text-[var(--button-text)]">POPULER</div>
             <p className="text-xl mb-4 font-bold">Appetizer</p>
             <p>Start with a taste of Poopup</p>
-
             <div className="flex mt-8">
-              <del className="text-gray-500 mt-4 mr-2">$18</del>
-              <p className="text-5xl font-bold">$9</p>
+              <del className="text-gray-500 mt-4 mr-2">$38</del>
+              <p className="text-5xl font-bold">$19</p>
               <p className="text-sm mt-6 ml-2 text-gray-500 ">USD</p>
             </div>
             <div>
@@ -366,7 +388,10 @@ export default function Home() {
               </div>
               <div className="flex mt-4">
                 <FontAwesomeIcon icon={faCheck} className="text-xl text-gray-500 mr-2" />
-                <p className="text-md text-gray-500">1 website</p>
+                <div className="flex">
+                  <p className="text-md text-gray-500 bg-blue-100 px-1 mr-1">Unlimited</p>
+                  <p className="text-md text-gray-500">website</p>
+                </div>
               </div>
               <div className="flex mt-4">
                 <FontAwesomeIcon icon={faCheck} className="text-xl text-gray-500 mr-2" />
@@ -380,9 +405,120 @@ export default function Home() {
             </div>
             <p className="text-sm text-gray-500 text-center mt-4 mb-6">Pay once. Access forever</p>
           </div>
+        </div>
+        <p className="text-center mt-10 text-sm text-gray-500">*With great power comes great responsibility. Use PoopUp responsibly.</p>
+      </div>
 
+      {/* slide 7 */}
+
+      <div className="slide p-40 bg-[var(--usecase-card)]">
+        <div className="flex justify-center">
+          <div>
+            <p className="font-bold text-[var(--ocean-green)]">FAQ</p>
+            <p className="text-4xl font-extrabold text-[var(--first-slide-text)] mt-4">Frequently Asked Questions</p>
+          </div>
+
+          <div className="container w-1/2 pl-40">
+
+            <div className="btn cursor-pointer"
+              onClick={handleQues1}>
+              <div className="">
+                <hr className="text-center border-1 border-gray-500 mt-10" />
+                <div className="flex justify-between mt-6">
+                  <p className={`text-xl font-bold ${ques1?"text-[var(--ocean-green)]":""}`}>Is it a subscription?</p>
+                  <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+                </div>
+              </div>
+            </div>
+
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques1 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
+                }`}>
+              <p className="text-lg mt-3">
+                 Nope. You pay once and it's yours forever.
+              </p>
+            </div>
+
+            <div className="btn cursor-pointer"
+              onClick={handleQues2}>
+              <hr className="text-center border-1 border-gray-500 mt-10" />
+              <div className="flex justify-between mt-6">
+                <p className={`text-xl font-bold ${ques2?"text-[var(--ocean-green)]":""}`}>Is it compatible with?...</p>
+                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+              </div>
+            </div>
+
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques2 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
+                }`}>
+              <p className="text-lg mt-3">
+                Wordpress, Shopify, Carrd, Webflow, Bubble, Wix, etc. are all supported.<br></br>
+                If you can add a code snippet (script) to your website, you can use <br></br>
+                PoopUp.
+              </p>
+            </div>
+
+            <div className="btn cursor-pointer"
+              onClick={handleQues3}>
+              <hr className="text-center border-1 border-gray-500 mt-10" />
+              <div className="flex justify-between mt-6">
+                <p className={`text-xl font-bold ${ques3?"text-[var(--ocean-green)]":""}`}>Do i need to code?</p>
+                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+              </div>
+            </div>
+
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques3 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
+                }`}>
+              <p className="text-lg mt-3">
+                 You don't. All you need to do is copy and paste a small code snippet in <br></br> 
+                 your website's head tag. Wordpress, Shopify, Webflow, Bubble, Wix,<br></br>
+                  etc. are all supported.
+              </p>
+            </div>
+
+            <div className="btn cursor-pointer"
+              onClick={handleQues4}>
+              <hr className="text-center border-1 border-gray-500 mt-10" />
+              <div className="flex justify-between mt-6">
+                <p className={`text-xl font-bold ${ques4?"text-[var(--ocean-green)]":""}`}>Does Poopup work on mobile?</p>
+                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+              </div>
+            </div>
+
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques4 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
+                }`}>
+               <p className="text-lg mt-3">
+                 Yes! Only one PoopUp will be displayed at a time to avoid cluttering your <br></br> visitor's screen.
+               </p>
+            </div>
+
+            <div className="btn cursor-pointer"
+              onClick={handleQues5}>
+              <hr className="text-center border-1 border-gray-500 mt-10" />
+              <div className="flex justify-between mt-6">
+                <p className={`text-xl font-bold ${ques5?"text-[var(--ocean-green)]":""}`}>What can I customize?</p>
+                <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 " />
+              </div>
+            </div>
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques5 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
+                }`}>
+              <p className="text-lg mt-3">
+                For now you can customize the following:
+                <br></br>
+                . PoopUp title
+                <br></br>
+                . PoopUp body
+                <br></br>
+                . PoopUp icon
+                <br></br>
+                . when are PoopUps firing 
+                <br></br>
+                . How often are PoopUps displayed
+
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   );
 }

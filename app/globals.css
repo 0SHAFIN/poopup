@@ -22,6 +22,7 @@
   --button-text:#65372a; /* Light text */
   --card-light-bg:#f9dfb9;
   --usecase-card:#f9e9d2;
+  --ocean-green:#399373;
 }
 body {
   color: var(--foreground);
