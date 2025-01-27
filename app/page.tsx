@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck ,faArrowRight,faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { faCheck ,faArrowRight,faAngleUp,faPlus } from "@fortawesome/free-solid-svg-icons";
 import { on } from "events";
 
 export default function Home() {
@@ -155,6 +155,44 @@ export default function Home() {
 
       {/* slide 3 */}
       <div className="slide p-40 bg-[var(--first-slide-bg)]">
+        <div className="flex justify-center mb-20 ">
+          <p className="text-5xl font-extrabold text-[var(--first-slide-text)]">Give your visitors a reason <br></br>to buy today,<b className="bg-[var(--button-text)] text-[var(--card-light-bg)]">not tomorrow</b></p>
+          
+         
+        </div>
+        <div className="flex justify-center mx-36">
+          <div className="flex-col">
+            <div className="flex  justify-between">
+               <div className="flex">
+                  <p className="text-3xl">✍️</p>
+                  <p className="text-[var(--button-bg)] font-bold mt-2 text-xl mx-2">Create a PoopUp</p>
+                </div>
+                <FontAwesomeIcon icon={faPlus} className="text-xl mt-2"/>
+            </div>
+
+            <div className="flex justify-between mt-10">
+                <div className="flex">
+                  <p className="text-3xl">🔗</p>
+                  <p className="text-[var(--button-bg)] font-bold mt-2 text-xl mx-2">Create a PoopUp</p>
+                </div>
+                <FontAwesomeIcon icon={faPlus} className="text-xl mt-2"/>
+            </div>
+
+            <div className="flex justify-between mt-10">
+                <div className="flex">
+                  <p className="text-3xl">
+                    <Image src="/icon/icon_color.png" width={50} height={50} alt="Rocket Icon"/>
+                  </p>
+                  <p className="text-[var(--button-bg)] font-bold mt-2 text-xl mx-2">Create a PoopUp</p>
+                </div>
+                <FontAwesomeIcon icon={faPlus} className="text-xl mt-2 ml-56"/>
+            </div>
+          </div>
+
+          <div className="bg-[var(--first-slide-bg)] rounded-3xl shadow-lg p-2 ml-14">
+            <video src="https://poopup.co/feature_1.mp4" controls className="rounded-3xl w-96 h-96"></video>
+          </div>
+        </div>
       </div>
     </div>
   );
