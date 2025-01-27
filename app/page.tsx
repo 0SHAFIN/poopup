@@ -1,14 +1,26 @@
 "use client";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck ,faArrowRight,faAngleUp,faPlus } from "@fortawesome/free-solid-svg-icons";
-import { on } from "events";
+import { faCheck, faArrowRight, faAngleUp, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { auth } from "../lib/firebase";
+import { onAuthStateChanged, signOut, User } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [imageSrc, setImageSrc] = useState("/icon/icon_bw.png"); // Default image source
-  const [hoverActivated, setHoverActivated] = useState(false); // Default hover state
- 
+  const [imageSrc, setImageSrc] = useState("/icon/icon_bw.png");
+  const [hoverActivated, setHoverActivated] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div>
@@ -19,8 +31,22 @@ export default function Home() {
             <a className="px-5" href="#">Pricing</a>
             <a className="px-5" href="#">FAQ</a>
           </div>
-          <button className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629]"
-          >Get Started</button>
+
+          {user ? (
+            <button
+              onClick={() => router.push("/dashboard")}
+              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629]"
+            >
+              {user.email}
+            </button>
+          ) : (
+            <button
+              onClick={() => router.push("/signup")}
+              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629]"
+            >
+              Get Started
+            </button>
+          )}
         </div>
          
          {/* Title part */}
