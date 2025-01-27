@@ -21,6 +21,7 @@
   --button-bg: #ffb54c; /* Dark button */
   --button-text:#65372a; /* Light text */
   --card-light-bg:#f9dfb9;
+  --usecase-card:#f9e9d2;
 }
 body {
   color: var(--foreground);
