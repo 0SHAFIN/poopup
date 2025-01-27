@@ -24,7 +24,7 @@ const ForgotPasswordPage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
       <div className="w-96 bg-gray-800 p-6 rounded-md">
-        <h1 className="text-2xl font-bold mb-4">Forgot Password</h1>
+        <h1 className="text-center text-2xl font-bold mb-4">Forgot Password</h1>
         <input
           type="email"
           value={email}
@@ -36,8 +36,14 @@ const ForgotPasswordPage: React.FC = () => {
           onClick={handlePasswordReset}
           className="w-full bg-orange-500 p-2 rounded text-white"
         >
-          Send Reset Email
+          Reset Email
         </button>
+        <p className="text-sm text-gray-400 mt-4">
+          Back to Login{" "}
+          <a href="/login" className="text-orange-400 hover:underline">
+            Log in
+          </a>
+        </p>
         {message && <p className="mt-4 text-green-500">{message}</p>}
         {error && <p className="mt-4 text-red-500">{error}</p>}
       </div>
