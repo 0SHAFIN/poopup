@@ -364,6 +364,7 @@ export default function Home() {
                 <p className="text-md text-gray-500">Simple analytics</p>
               </div>
             </div>
+            {/* get poopup button */}
             <div className="flex justify-center">
               <button className="px-36 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10">
                 Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
@@ -516,6 +517,65 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* slide 8 */}
+      <div className="slide p-40 bg-[var(--usecase-card)]">
+        <div className="flex justify-center">
+          <div className="w-fit bg-[var(--first-slide-bg)] p-20 px-34 rounded-3xl shadow-lg">
+            <p className="font-extrabold text-5xl">
+              Get more customers today
+            </p>
+            <p className="text-center text-lg mt-10">Don't let your visitors leave without taking action.</p>
+            <div className="flex justify-center">
+              <button className="mt-14 px-24 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10">
+                Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* slide 9 footer */}
+      <div className="slide px-40 py-20 bg-[var(--card-light-bg)] border-t-2 border-[var(--foother-border)]">
+        <div className="flex justify-between text-md text-[var(--first-slide-text)]">
+          <div className="flex-col">
+              <p className="text-lg font-bold text-[var(--first-slide-text)] ">PoopUp</p>
+              <p>Wake-up call popups to turn your</p>
+              <p >visitors into customers.</p>
+              <p className="mt-4">Copyright © 2024 - All rights</p>
+              <p>reserved</p>
+              <div className="flex bg-black px-3 py-1 w-fit mt-5 rounded">
+                <p className="text-gray-200">Buit with</p>
+                <p>⚡</p>
+                <p className="text-white">ShipFast</p>
+              </div>
+          </div>
+          <div className="flex-col">
+            <p className="font-bold text-gray-400 ">LINKS</p>
+            <p>Login</p>
+            <p>Pricing</p>
+          </div>
+          <div className="flex-col">
+            <p className="font-bold text-gray-400 ">Legal</p>
+            <p>Terms of Service</p>
+            <p>Privacy Policy</p>
+          </div> 
+          <div className="flex-col">
+            <p className="font-bold text-gray-400 ">More</p>
+            <p>Newsletter for makers</p>
+            <p>IndiePage</p>
+            <p>ShipFast</p>
+            <p> ByeDispute</p>
+            <p>ZenVoice</p>
+            <p>DataFast</p>
+            <p>CodeFast</p>
+          </div> 
+
+        </div>
+        <div className="flex mt-36 mb-20">
+           <p>Hey Curious 👋 I'm <u className="font-bold">Marc</u>, the creator of PoopUp. You can follow my work on <u className="font-bold">Twitter</u>.</p>
         </div>
       </div>
 
