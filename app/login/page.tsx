@@ -25,15 +25,15 @@ const LoginPage: React.FC = () => {
 
   return (
 <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
-  <div className="w-96 bg-gray-800 p-6 rounded-md">
-    <h1 className="text-center text-2xl font-bold mb-4">Login</h1>
+  <div className="w-96 bg-gray-800 p-6 rounded-3xl shadow-2xl">
+    <h1 className="text-center text-2xl font-bold mb-6">Login</h1>
     <form onSubmit={handleLogin} className="flex flex-col">
       <input
         type="email"
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-2 rounded bg-gray-700 mb-4"
+        className="w-full p-2 rounded-lg bg-gray-700 mb-6"
         required
       />
       <input
@@ -41,28 +41,28 @@ const LoginPage: React.FC = () => {
         placeholder="Enter your password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 rounded bg-gray-700 mb-4"
+        className="w-full p-2 rounded-lg bg-gray-700 mb-6"
         required
       />
       <button
         type="submit"
-        className="w-full bg-orange-500 p-2 rounded text-white"
+        className="w-full bg-[var(--button-bg)] hover:bg-[#FFA629] p-2 rounded-lg text-[var(--button-text)] font-bold"
       >
         Login
       </button>
       {error && <p className="mt-4 text-red-500">{error}</p>}
     </form>
     <p className="text-sm text-gray-400 mt-4 flex justify-between">
-            <span>
-                No account?{" "}
-                <a href="/signup" className="text-orange-400 hover:underline">
-                    Sign up
-                </a>
-            </span>
-            <a href="/forgot-password" className="text-orange-400 hover:underline">
-                Forgot password?
-            </a>
-        </p>
+      <span>
+        No account?{" "}
+        <a href="/signup" className="text-[var(--button-bg)] hover:underline">
+          Sign up
+        </a>
+      </span>
+      <a href="/forgot-password" className="text-[var(--button-bg)] hover:underline">
+        Forgot password?
+      </a>
+    </p>
   </div>
 </div>
 

@@ -23,24 +23,24 @@ const ForgotPasswordPage: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
-      <div className="w-96 bg-gray-800 p-6 rounded-md">
-        <h1 className="text-center text-2xl font-bold mb-4">Forgot Password</h1>
+      <div className="w-96 bg-gray-800 p-6 rounded-3xl shadow-2xl">
+        <h1 className="text-center text-2xl font-bold mb-6">Forgot Password</h1>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
-          className="w-full p-2 rounded bg-gray-700 mb-4"
+          className="w-full p-2 rounded-lg bg-gray-700 mb-6"
         />
         <button
           onClick={handlePasswordReset}
-          className="w-full bg-orange-500 p-2 rounded text-white"
+          className="w-full bg-[var(--button-bg)] hover:bg-[#FFA629] p-2 rounded-lg text-[var(--button-text)] font-bold"
         >
           Reset Email
         </button>
         <p className="text-sm text-gray-400 mt-4">
           Back to Login{" "}
-          <a href="/login" className="text-orange-400 hover:underline">
+          <a href="/login" className="text-[var(--button-bg)] hover:underline">
             Log in
           </a>
         </p>
