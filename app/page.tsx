@@ -58,9 +58,14 @@ export default function Home() {
           >Get Started</button>
         </div>
 
-        {/* Title part */}
-
-        <div className="display flex flex-col justify-center relative mt-24">
+        {/* slide1 Title part */}
+        <div className="mt-24 relative mb-10 mx-80">
+          <div className="absolute top-1/2 right-0 -translate-y-1/2">
+            <p className="text-sm text-[var(--button-text)]">PoopUp in action</p>
+            <Image src="/icon/arrow1.png" width={80} height={80} alt="Arrow Icon" />
+          </div>
+        </div>
+        <div className="display flex flex-col justify-center relative ">
           <span>
             {/* Text Content */}
             <p className="text-5xl font-extrabold text-center mt-10"
@@ -98,7 +103,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mr-28">
               <p className={`text-5xl font-extrabold text-[var(--button-bg)] ${hoverActivated ? "text-green-800" : ""}`}
                 onMouseEnter={() => {
                   setImageSrc("/icon/icon_color.png");
@@ -170,17 +175,21 @@ export default function Home() {
         </div>
 
         <div className="flex justify-center mt-28">
-          <div className="mx-20">
+          <div className="mx-10">
             <p className="text-center text-4xl">🫣</p>
             <p className="text-center text-lg text-bold text-[var(--card-light-bg)]">Potential customer is <br></br> interested</p>
           </div>
-
-          <div className="mx-20">
+          <div>
+            <Image src="/icon/arrow3.png" width={73} height={80} alt="Arrow Icon" className="mt-5" />
+          </div>
+          <div className="mx-10">
             <p className="text-center text-4xl">😕</p>
             <p className="text-center text-lg text-bold text-[var(--card-light-bg)]">Doesn't find a reason to <br></br> buy <u>right now</u></p>
           </div>
-
-          <div className="mx-20">
+          <div>
+            <Image src="/icon/arrow2.png" width={100} height={80} alt="Arrow Icon" />
+          </div>
+          <div className="mx-10">
             <p className="text-center text-4xl">😬</p>
             <p className="text-center text-lg text-bold text-[var(--card-light-bg)]">Leaves and never <br></br> comes back</p>
           </div>
@@ -329,9 +338,15 @@ export default function Home() {
 
       {/* slide 5 */}
 
-      <div className="slide p-40 bg-[var(--first-slide-bg)]">
-        <video src="https://youtu.be/bRnwurfSkSM" controls autoPlay className="rounded-3xl w-96 h-96 mx-auto">
-        </video>
+      <div className="slide py-20 px-40 bg-[var(--first-slide-bg)] relative">
+          <div className=" absolute top-1/2 left-30 ">
+            <p className="text-sm text-[var(--button-text)]">PoopUp in 3 miniutes</p>
+            <Image src="/icon/arrow1.png" width={80} height={80} alt="Arrow Icon" />
+          </div>
+          <div className="flex justify-center ">
+            <video src="https://www.youtube.com/watch?v=bRnwurfSkSM&ab_channel=MarcLou" controls autoPlay className="rounded-3xl w-2/3 h-1/2  bg-[var(--usecase-card)] shadow-xl p-4"> </video>
+          </div>
+        
       </div>
 
       {/* slide 6 */}
