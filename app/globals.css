@@ -35,3 +35,8 @@ input:-webkit-autofill {
   -webkit-text-fill-color: #ffffff;
   caret-color: #ffffff;
 }
+
+button:active {
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
