@@ -25,9 +25,9 @@ export default function Home() {
   return (
     <div>
       <div className="slide h-screen bg-[var(--first-slide-bg)] text-[var(--first-slide-text)] px-28">
-        <div className="nav flex justify-between items-center p-4">
+        <div className="nav flex justify-between items-center p-4 relative">
           <p className="text-xl font-bold text-[var(--first-slide-text)]">PoopUp</p>
-          <div className="nav-links">
+          <div className="nav-links absolute left-1/2 transform -translate-x-1/2 flex gap-5">
             <a className="px-5" href="#">Pricing</a>
             <a className="px-5" href="#">FAQ</a>
           </div>
