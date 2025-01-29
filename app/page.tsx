@@ -2,12 +2,26 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { auth } from "../lib/firebase";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { useRouter } from "next/navigation";
 import { faCheck, faArrowRight, faAngleUp, faPlus , faMinus } from "@fortawesome/free-solid-svg-icons";
 import { on } from "events";
 
 export default function Home() {
   const [imageSrc, setImageSrc] = useState("/icon/icon_bw.png"); // Default image source
   const [hoverActivated, setHoverActivated] = useState(false); // Default hover state
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const [isCollapsed1, setIsCollapsed] = useState(false);
   const [isCollapsed2, setIsCollapsed2] = useState(false);
   const [isCollapsed3, setIsCollapsed3] = useState(false);
@@ -48,14 +62,28 @@ export default function Home() {
   return (
     <div>
       <div className="slide h-screen bg-[var(--first-slide-bg)] text-[var(--first-slide-text)] px-28">
-        <div className="nav flex justify-between items-center p-4">
+        <div className="nav flex justify-between items-center p-4 relative">
           <p className="text-xl font-bold text-[var(--first-slide-text)]">PoopUp</p>
-          <div className="nav-links">
+          <div className="nav-links absolute left-1/2 transform -translate-x-1/2 flex gap-5">
             <a className="px-5" href="#">Pricing</a>
             <a className="px-5" href="#">FAQ</a>
           </div>
-          <button className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629]"
-          >Get Started</button>
+
+          {user ? (
+            <button
+              onClick={() => router.push("/dashboard")}
+              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629]"
+            >
+              {user.email}
+            </button>
+          ) : (
+            <button
+              onClick={() => router.push("/signup")}
+              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629]"
+            >
+              Get Started
+            </button>
+          )}
         </div>
 
         {/* slide1 Title part */}

@@ -24,41 +24,41 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
-      <div className="w-96 bg-gray-800 p-6 rounded-md shadow-md">
-        <h1 className="text-2xl font-bold text-center text-white mb-4">
-          Sign Up
-        </h1>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+      <div className="w-96 bg-gray-800 p-6 rounded-3xl shadow-2xl">
+        <h1 className="text-center text-2xl font-bold mb-6">Sign Up</h1>
         <form onSubmit={handleSignup} className="flex flex-col">
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 mb-4 rounded bg-gray-700 text-white"
+            className="w-full p-2 rounded-lg bg-gray-700 mb-6"
             required
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 mb-4 rounded bg-gray-700 text-white"
+            className="w-full p-2 rounded-lg bg-gray-700 mb-6"
             required
           />
           <button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white p-2 rounded"
+            className="w-full bg-[var(--button-bg)] hover:bg-[#FFA629] p-2 rounded-lg text-[var(--button-text)] font-bold"
           >
             Sign Up
           </button>
-          {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
+          {error && <p className="mt-4 text-red-500">{error}</p>}
         </form>
-        <p className="text-sm text-gray-400 mt-4">
-          Have account?{" "}
-          <a href="/login" className="text-orange-400 hover:underline">
-            Log in
-          </a>
+        <p className="text-sm text-gray-400 mt-4 flex justify-between">
+          <span>
+            Already have an account?{" "}
+            <a href="/login" className="text-[var(--button-bg)] hover:underline">
+              Log in
+            </a>
+          </span>
         </p>
       </div>
     </div>
