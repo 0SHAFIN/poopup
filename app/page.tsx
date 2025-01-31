@@ -6,7 +6,6 @@ import { auth } from "../lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { faCheck, faArrowRight, faAngleUp, faPlus , faMinus } from "@fortawesome/free-solid-svg-icons";
-import { on } from "events";
 
 export default function Home() {
   const [imageSrc, setImageSrc] = useState("/icon/icon_bw.png"); // Default image source

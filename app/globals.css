@@ -42,3 +42,8 @@ button:active {
   transform: scale(0.95);
   transition: transform 0.2s ease;
 }
+
+.sitecard:hover {
+  transform: scale(0.95);
+  transition: transform 0.2s ease;
+}
