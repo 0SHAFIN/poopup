@@ -47,7 +47,11 @@ export default function Dashboard() {
               className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629] flex items-center gap-2"
             >
               {user ? (
-              <span>{user.email} {" "} </span>
+                <>
+                  <div className="w-6 h-6 bg-[var(--card-light-bg)] text-[var(--button-text)] rounded-full flex items-center justify-center">
+                    {user?.email?.charAt(0).toUpperCase() ?? ""}
+                  </div><span>{user.email} {" "} </span>
+                </>
               ) : (
               <span>Account</span>
               )}
@@ -86,30 +90,30 @@ export default function Dashboard() {
           3 PoopUps
           {/* PoopUps */}
             <div className="grid grid-cols-2 gap-6 mt-8">
-              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-6 min-w-[300px]">
+              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-5 min-w-[300px]">
                 <div className="flex items-center gap-2">
                   <Image src="/icon/poopxd.png" width={28} height={28} alt="Site Logo" />
-                  <h2 className="text-[var(--first-slide-text)] text-lg font-semibold">poopup.co</h2>
+                    <h2 className="text-[var(--first-slide-text)] text-base font-semibold">poopup.co</h2>
                 </div>
-                <p className="text-[var(--first-slide-text)] text-sm font-semibold ml-9">
+                <p className="text-[var(--first-slide-text)] text-xs font-semibold ml-9">
                 0 visitors in last 24 hours
                 </p>
               </div>
-              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-6 min-w-[300px]">
+              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-5 min-w-[300px]">
                 <div className="flex items-center gap-2">
                   <Image src="/icon/poopxd.png" width={28} height={28} alt="Site Logo" />
-                  <h2 className="text-[var(--first-slide-text)] text-lg font-semibold">poopup.co</h2>
+                    <h2 className="text-[var(--first-slide-text)] text-base font-semibold">poopup.co</h2>
                 </div>
-                <p className="text-[var(--first-slide-text)] text-sm font-semibold ml-9">
+                <p className="text-[var(--first-slide-text)] text-xs font-semibold ml-9">
                 0 visitors in last 24 hours
                 </p>
               </div>
-              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-6 min-w-[300px]">
+              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-5 min-w-[300px]">
                 <div className="flex items-center gap-2">
                   <Image src="/icon/poopxd.png" width={28} height={28} alt="Site Logo" />
-                  <h2 className="text-[var(--first-slide-text)] text-lg font-semibold">poopup.co</h2>
+                    <h2 className="text-[var(--first-slide-text)] text-base font-semibold">poopup.co</h2>
                 </div>
-                <p className="text-[var(--first-slide-text)] text-sm font-semibold ml-9">
+                <p className="text-[var(--first-slide-text)] text-xs font-semibold ml-9">
                 0 visitors in last 24 hours
                 </p>
               </div>

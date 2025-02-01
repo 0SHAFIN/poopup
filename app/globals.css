@@ -43,7 +43,21 @@ button:active {
   transition: transform 0.2s ease;
 }
 
-.sitecard:hover {
+.sitecard:active {
   transform: scale(0.95);
   transition: transform 0.2s ease;
+}
+
+.sitecard:hover {
+  cursor: pointer;
+}
+
+.grab-cursor {
+  cursor: grab;
+  outline: 2px solid #000; /* Adjust the outline color and width as needed */
+}
+
+.grabbing-cursor {
+  cursor: grabbing;
+  outline: 2px solid #000; /* Adjust the outline color and width as needed */
 }
