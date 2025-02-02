@@ -5,7 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { faCheck, faArrowRight, faAngleUp, faPlus , faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faArrowRight, faAngleUp, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import YoutubeEmbed from "./components/liteyoutube";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { on } from "events";
 
 export default function Home() {
@@ -13,8 +16,183 @@ export default function Home() {
   const [hoverActivated, setHoverActivated] = useState(false); // Default hover state
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
-  
+
   useEffect(() => {
+    // custom toast
+    const style = `.popsurge-container {
+      position: fixed;
+      z-index: 2147483647;
+      top: 1rem;
+      right: 1rem;
+      max-width: 400px;
+      width: 100%;
+      user-select: none;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  .popsurge-toast {
+      background: #ebeae9;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      animation: slideIn 0.3s ease-out;
+      padding: 16px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      opacity: 90%;
+      border: 1px solid #e5e7eb;
+  }
+  
+  .toast-content {
+      display: flex;
+      gap: 10px;
+    
+  }
+  
+  .toast-image {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+  }
+  
+  .toast-text {
+      flex: 1;
+  }
+  
+  .toast-title {
+      font-weight: bold;
+      font-size: 17px
+      margin-bottom: 4px;
+      color: back;
+  }
+  
+  .toast-subtitle {
+      color: #4b5563;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 1.25rem;
+  }
+  
+  .toast-time {
+      color: #6b7280;
+      font-size: 16px;
+      font-weight: 500;
+  
+      margin-left: 12px;
+  }
+  
+  
+  @keyframes slideIn {
+      0% { transform: translateX(40px); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+      0% { transform: translateX(0); opacity: 1; }
+      50% {transform: scale(1.05); }
+      100% {transform: translateX(40px); opacity: 0; }
+  }`;
+
+    // Configuration
+    const config = {
+      waitFor: 2000,
+      toastEvery: 2000,
+      toastDuration: 15000,
+      closeButton: true,
+      messages: [
+        {
+          "imG": "/icon/gmail.jpg",
+          "title": "Pierre Quiroule",
+          "subtitle": "Add VAT to invoice now!",
+          "time": "1m"
+        },
+        {
+          "imG": "/icon/mcdonalds.jpg",
+          "title": "Your order just arrived! 🍔🍟🌭",
+          "subtitle": "It's your 13th BigMama order thus moonth!",
+          "time": "now"
+        },
+        {
+          "imG": "/icon/netflix.jpg",
+          "title": "❌Daily average: 3 hours",
+          "subtitle": "Your startup won't grow by binge watching all day",
+          "time": "2d"
+        },
+        {
+          "imG": "/icon/xIcon.png",
+          "title": "0 likes on your last post",
+          "subtitle": "COnsider a career shift",
+          "time": "now"
+        }
+  
+      ]
+    };
+
+    let displayCount = 0;
+    const init = () => {
+      // Create style element
+      const styleEl = document.createElement('style');
+      styleEl.textContent = style;
+      document.head.appendChild(styleEl);
+
+      // Create container
+      const container = document.createElement('div');
+      container.className = 'popsurge-container';
+      document.body.appendChild(container);
+
+      // Start display sequence
+      showNextMessage();
+    };
+
+    const showNextMessage = () => {
+      config.messages.forEach((message, index) => {
+        setTimeout(() => {
+          const toast = createToast(message);
+          const container = document.querySelector('.popsurge-container');
+          if (container) {
+            container.appendChild(toast);
+
+          }
+        }, index * config.toastEvery); // Stagger by index
+      });
+    }
+    interface Message {
+      imG:string,
+      title: string;
+      subtitle: string;
+      time: string;
+
+    }
+    const createToast = (message: Message): HTMLDivElement => {
+      const toast = document.createElement('div');
+      toast.className = 'popsurge-toast';
+
+      toast.innerHTML =`
+        <div class="toast-content">
+            <img src="${message.imG}" alt="icon" class="toast-image">
+            <div class="toast-text">
+                <div class="toast-title">${message.title}</div>
+                <div class="toast-subtitle">${message.subtitle}</div>
+            </div>
+        </div>
+        <div class="toast-time">${message.time}</div>
+    `;
+     // Auto-remove after 15 seconds
+    setTimeout(() => {
+      toast.classList.add('toast-hide');
+      setTimeout(() => {
+        toast.remove();
+      }, 300); // Match animation duration
+    },config.toastDuration);
+
+      return toast;
+    };
+    init();
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
@@ -61,12 +239,15 @@ export default function Home() {
 
   return (
     <div>
+      <ToastContainer
+        className="custom-toast-container" // Add a custom class for the container
+      />
       <div className="slide h-screen bg-[var(--first-slide-bg)] text-[var(--first-slide-text)] px-28">
         <div className="nav flex justify-between items-center p-4 relative">
           <p className="text-xl font-bold text-[var(--first-slide-text)]">PoopUp</p>
           <div className="nav-links absolute left-1/2 transform -translate-x-1/2 flex gap-5">
-            <a className="px-5" href="#">Pricing</a>
-            <a className="px-5" href="#">FAQ</a>
+            <a className="px-5" href="#price">Pricing</a>
+            <a className="px-5" href="#faq">FAQ</a>
           </div>
 
           {user ? (
@@ -190,6 +371,8 @@ export default function Home() {
           </span>
         </div>
       </div>
+
+      {/* slide 2 */}
       <div className="slide p-40 bg-[var(--button-text)]">
         <div className="flex justify-center">
           <p className="text-5xl font-extrabold text-[var(--card-light-bg)]">97% of visitors aren't ready to buy</p>
@@ -367,21 +550,22 @@ export default function Home() {
       {/* slide 5 */}
 
       <div className="slide py-20 px-40 bg-[var(--first-slide-bg)] relative">
-          <div className=" absolute top-1/2 left-30 ">
-            <p className="text-sm text-[var(--button-text)]">PoopUp in 3 miniutes</p>
-            <Image src="/icon/arrow1.png" width={80} height={80} alt="Arrow Icon" />
-          </div>
-          <div className="flex justify-center ">
-            <video src="https://www.youtube.com/watch?v=bRnwurfSkSM&ab_channel=MarcLou" controls autoPlay className="rounded-3xl w-2/3 h-1/2  bg-[var(--usecase-card)] shadow-xl p-4"> </video>
-          </div>
-        
+        <div className=" absolute top-1/2 left-30 ">
+          <p className="text-sm text-[var(--button-text)]">PoopUp in 3 miniutes</p>
+          <Image src="/icon/arrow1.png" width={80} height={80} alt="Arrow Icon" />
+        </div>
+        <div className="flex justify-center w-2/3 mx-auto p-3 bg-[var(--usecase-card)] rounded-3xl shadow-lg">
+           <YoutubeEmbed videoId="bRnwurfSkSM" />
+          {/* <video src="https://www.youtube.com/watch?v=bRnwurfSkSM&ab_channel=MarcLou" controls autoPlay className="rounded-3xl w-2/3 h-1/2  bg-[var(--usecase-card)] shadow-xl p-4"> </video> */}
+        </div>
+
       </div>
 
       {/* slide 6 */}
-      <div className="slide p-40 bg-[var(--usecase-card)]">
+      <div className="slide p-40 bg-[var(--usecase-card)]" >
         <p className="text-center text-lg mb-8 text-[var(--ocean-green)]
-        ">Pricing</p>
-        <p className="text-center text-5xl font-extrabold text-[var(--first-slide-text)] mb-36">Make your product a non-brainer purchase</p>
+        " id="price">Pricing</p>
+        <p className="text-center text-5xl font-extrabold text-[var(--first-slide-text)] mb-24">Make your product a non-brainer purchase</p>
         <div className="flex justify-center">
 
           <div className="bg-[var(--first-slide-bg)] w-1/3 p-10 rounded-3xl mr-10">
@@ -455,7 +639,7 @@ export default function Home() {
 
       {/* slide 7 */}
 
-      <div className="slide p-40 bg-[var(--usecase-card)]">
+      <div className="slide p-40 bg-[var(--usecase-card)]" id="faq">
         <div className="flex justify-center">
           <div>
             <p className="font-bold text-[var(--ocean-green)]">FAQ</p>
@@ -469,16 +653,16 @@ export default function Home() {
               <div className="">
                 <hr className="text-center border-1 border-gray-500 mt-10" />
                 <div className="flex justify-between mt-6">
-                  <p className={`text-xl font-bold ${ques1?"text-[var(--ocean-green)]":""}`}>Is it a subscription?</p>
-                  <FontAwesomeIcon icon={!ques1?faPlus:faMinus} className="text-xl mt-1 " />
+                  <p className={`text-xl font-bold ${ques1 ? "text-[var(--ocean-green)]" : ""}`}>Is it a subscription?</p>
+                  <FontAwesomeIcon icon={!ques1 ? faPlus : faMinus} className="text-xl mt-1 " />
                 </div>
               </div>
             </div>
 
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques1 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
-                }`}>
+              }`}>
               <p className="text-lg mt-3">
-                 Nope. You pay once and it's yours forever.
+                Nope. You pay once and it's yours forever.
               </p>
             </div>
 
@@ -486,13 +670,13 @@ export default function Home() {
               onClick={handleQues2}>
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
-                <p className={`text-xl font-bold ${ques2?"text-[var(--ocean-green)]":""}`}>Is it compatible with?...</p>
-                <FontAwesomeIcon icon={!ques2?faPlus:faMinus} className="text-xl mt-1 " />
+                <p className={`text-xl font-bold ${ques2 ? "text-[var(--ocean-green)]" : ""}`}>Is it compatible with?...</p>
+                <FontAwesomeIcon icon={!ques2 ? faPlus : faMinus} className="text-xl mt-1 " />
               </div>
             </div>
 
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques2 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
-                }`}>
+              }`}>
               <p className="text-lg mt-3">
                 Wordpress, Shopify, Carrd, Webflow, Bubble, Wix, etc. are all supported.<br></br>
                 If you can add a code snippet (script) to your website, you can use <br></br>
@@ -504,17 +688,17 @@ export default function Home() {
               onClick={handleQues3}>
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
-                <p className={`text-xl font-bold ${ques3?"text-[var(--ocean-green)]":""}`}>Do i need to code?</p>
-                <FontAwesomeIcon icon={!ques3?faPlus:faMinus} className="text-xl mt-1 " />
+                <p className={`text-xl font-bold ${ques3 ? "text-[var(--ocean-green)]" : ""}`}>Do i need to code?</p>
+                <FontAwesomeIcon icon={!ques3 ? faPlus : faMinus} className="text-xl mt-1 " />
               </div>
             </div>
 
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques3 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
-                }`}>
+              }`}>
               <p className="text-lg mt-3">
-                 You don't. All you need to do is copy and paste a small code snippet in <br></br> 
-                 your website's head tag. Wordpress, Shopify, Webflow, Bubble, Wix,<br></br>
-                  etc. are all supported.
+                You don't. All you need to do is copy and paste a small code snippet in <br></br>
+                your website's head tag. Wordpress, Shopify, Webflow, Bubble, Wix,<br></br>
+                etc. are all supported.
               </p>
             </div>
 
@@ -522,28 +706,28 @@ export default function Home() {
               onClick={handleQues4}>
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
-                <p className={`text-xl font-bold ${ques4?"text-[var(--ocean-green)]":""}`}>Does Poopup work on mobile?</p>
-                <FontAwesomeIcon icon={!ques4?faPlus:faMinus} className="text-xl mt-1 " />
+                <p className={`text-xl font-bold ${ques4 ? "text-[var(--ocean-green)]" : ""}`}>Does Poopup work on mobile?</p>
+                <FontAwesomeIcon icon={!ques4 ? faPlus : faMinus} className="text-xl mt-1 " />
               </div>
             </div>
 
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques4 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
-                }`}>
-               <p className="text-lg mt-3">
-                 Yes! Only one PoopUp will be displayed at a time to avoid cluttering your <br></br> visitor's screen.
-               </p>
+              }`}>
+              <p className="text-lg mt-3">
+                Yes! Only one PoopUp will be displayed at a time to avoid cluttering your <br></br> visitor's screen.
+              </p>
             </div>
 
             <div className="btn cursor-pointer"
               onClick={handleQues5}>
               <hr className="text-center border-1 border-gray-500 mt-10" />
               <div className="flex justify-between mt-6">
-                <p className={`text-xl font-bold ${ques5?"text-[var(--ocean-green)]":""}`}>What can I customize?</p>
-                <FontAwesomeIcon icon={!ques5?faPlus:faMinus} className="text-xl mt-1 " />
+                <p className={`text-xl font-bold ${ques5 ? "text-[var(--ocean-green)]" : ""}`}>What can I customize?</p>
+                <FontAwesomeIcon icon={!ques5 ? faPlus : faMinus} className="text-xl mt-1 " />
               </div>
             </div>
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques5 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
-                }`}>
+              }`}>
               <p className="text-lg mt-3">
                 For now you can customize the following:
                 <br></br>
@@ -553,7 +737,7 @@ export default function Home() {
                 <br></br>
                 . PoopUp icon
                 <br></br>
-                . when are PoopUps firing 
+                . when are PoopUps firing
                 <br></br>
                 . How often are PoopUps displayed
 
@@ -581,32 +765,32 @@ export default function Home() {
       </div>
 
       {/* slide 9 footer */}
-      <div className="slide px-40 py-20 bg-[var(--card-light-bg)] border-t-2 border-[var(--foother-border)]">
-        <div className="flex justify-between text-md text-[var(--first-slide-text)]">
+      <div className="slide px-96 py-10 bg-[var(--card-light-bg)] border-t-2 border-[var(--foother-border)]">
+        <div className="flex justify-between text-md text-[var(--first-slide-text)] mt-10">
           <div className="flex-col">
-              <p className="text-lg font-bold text-[var(--first-slide-text)] ">PoopUp</p>
-              <p>Wake-up call popups to turn your</p>
-              <p >visitors into customers.</p>
-              <p className="mt-4">Copyright © 2024 - All rights</p>
-              <p>reserved</p>
-              <div className="flex bg-black px-3 py-1 w-fit mt-5 rounded">
-                <p className="text-gray-200">Buit with</p>
-                <p>⚡</p>
-                <p className="text-white">ShipFast</p>
-              </div>
+            <p className="text-lg font-bold text-[var(--first-slide-text)] ">PoopUp</p>
+            <p>Wake-up call popups to turn your</p>
+            <p >visitors into customers.</p>
+            <p className="mt-4">Copyright © 2024 - All rights</p>
+            <p>reserved</p>
+            <div className="flex bg-black px-3 py-1 w-fit mt-5 rounded">
+              <p className="text-gray-200">Buit with</p>
+              <p>⚡</p>
+              <p className="text-white">ShipFast</p>
+            </div>
           </div>
           <div className="flex-col">
-            <p className="font-bold text-gray-400 ">LINKS</p>
-            <p>Login</p>
-            <p>Pricing</p>
+            <p className="font-bold text-[var(--footer-text)] ">LINKS</p>
+            <p><a onClick={()=>router.push("/login")}>login</a></p>
+            <a href="#price">Pricing</a>
           </div>
           <div className="flex-col">
-            <p className="font-bold text-gray-400 ">Legal</p>
+            <p className="font-bold text-[var(--footer-text)] ">Legal</p>
             <p>Terms of Service</p>
             <p>Privacy Policy</p>
-          </div> 
+          </div>
           <div className="flex-col">
-            <p className="font-bold text-gray-400 ">More</p>
+            <p className="font-bold text-[var(--footer-text)] ">More</p>
             <p>Newsletter for makers</p>
             <p>IndiePage</p>
             <p>ShipFast</p>
@@ -614,11 +798,11 @@ export default function Home() {
             <p>ZenVoice</p>
             <p>DataFast</p>
             <p>CodeFast</p>
-          </div> 
+          </div>
 
         </div>
-        <div className="flex mt-36 mb-20">
-           <p>Hey Curious 👋 I'm <u className="font-bold">Marc</u>, the creator of PoopUp. You can follow my work on <u className="font-bold">Twitter</u>.</p>
+        <div className="flex mt-36 mb-8">
+          <p>Hey Curious 👋 I'm <u className="font-bold">Marc</u>, the creator of PoopUp. You can follow my work on <u className="font-bold">Twitter</u>.</p>
         </div>
       </div>
 

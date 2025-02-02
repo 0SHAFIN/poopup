@@ -24,6 +24,8 @@
   --usecase-card:#f9e9d2;
   --ocean-green:#399373;
   --foother-border:#e4caa8;
+  --toastMsg:#ebeae9;
+  --footer-text:#9b856d;
 }
 body {
   color: var(--foreground);
@@ -41,4 +43,7 @@ input:-webkit-autofill {
 button:active {
   transform: scale(0.95);
   transition: transform 0.2s ease;
+}
+html {
+  scroll-behavior: smooth;
 }
