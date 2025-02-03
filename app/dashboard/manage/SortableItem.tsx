@@ -36,7 +36,7 @@ export default function SortableItem({ id, name, image, content, timeAgo }: Sort
                 <input type="text" defaultValue={content} className={`w-full bg-[--first-slide-bg] text-[var(--first-slide-text)] p-1 rounded-lg text-sm focus:outline-none border ${!content ? 'border-gray-300' : 'border-transparent'} focus:border-gray-300`}/>
             </div>
             <div className="ml-2 mb-auto">
-                <input type="text" defaultValue={timeAgo} className={`w-10 bg-[--first-slide-bg] text-[var(--first-slide-text)] p-1 rounded-lg text-xs focus:outline-none border ${!timeAgo ? 'border-gray-300' : 'border-transparent'} focus:border-gray-300`}/>
+                <input type="text" defaultValue={timeAgo} className={`w-10 bg-[--first-slide-bg] text-[var(--first-slide-text)] text-right p-1 rounded-lg text-xs focus:outline-none border ${!timeAgo ? 'border-gray-300' : 'border-transparent'} focus:border-gray-300`}/>
             </div>
         </div>
     );
