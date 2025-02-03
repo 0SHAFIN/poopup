@@ -47,6 +47,10 @@ export default function Manage() {
     }
   };
 
+  const handleDeleteItem = (idToDelete: string) => {
+    setItems((prevItems) => prevItems.filter(item => item.id !== idToDelete));
+  };
+
   if (!isClient) {
     return null;
   }
@@ -60,10 +64,10 @@ export default function Manage() {
             Back
           </button>
 
-          <button className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] flex items-center gap-2" onClick={() => setIsTestRunning(!isTestRunning)}>
+            <button className={`bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] flex items-center gap-2 ${isTestRunning ? 'animate-pulse' : ''}`} onClick={() => setIsTestRunning(!isTestRunning)}>
             <FontAwesomeIcon icon={isTestRunning ? faTimes : faPlay} className="text-[var(--button-text)]" />
             {isTestRunning ? 'Stop' : 'Test'}
-          </button>
+            </button>
         </div>
       </header>
       
@@ -72,14 +76,14 @@ export default function Manage() {
           poopup.co
           <div className="flex-column mt-8">
             <p className="text-[var(--button-text)] font-medium text-sm font-semibold">Start PoopUp after (ms)</p>
-            <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm p-2 rounded-xl" />
+            <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm px-3 py-2 rounded-xl" />
             <p className="text-[var(--button-text)] font-medium text-xs mt-2 font-semibold">1. PoopUp loads (Could take a few seconds if slow network)</p>
-            <p className="text-[var(--button-text)] font-medium text-xs font-semibold">2. The first message loads after 100ms</p> {/* will get from db later */}
+            <p className="text-[var(--button-text)] font-medium text-xs font-semibold">2. The first message loads after 100ms</p>
             <p className="text-[var(--button-text)] font-medium text-sm mt-8 font-semibold">Send message every (ms)</p>
-            <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm p-2 rounded-xl" />
+            <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm px-3 py-2 rounded-xl" />
             <p className="text-[var(--button-text)] font-medium text-sm mt-8 font-semibold">Hide message after (ms)</p>
-            <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm p-2 rounded-xl" />
-            <button className="w-[24rem] bg-[var(--button-bg)] text-[var(--button-text)] text-base justify-center gap-2 mt-16 p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629]">
+            <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm px-3 py-2 rounded-xl" />
+            <button className="w-[24rem] bg-[#bba88c] text-[var(--button-text)] text-base justify-center gap-2 mt-16 p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#bba88c ]">
               Update
             </button>
           </div>
@@ -91,7 +95,17 @@ export default function Manage() {
               <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                 <SortableContext items={items} strategy={verticalListSortingStrategy}>
                   <div className="space-y-6 p-4">
-                    {items.map((item) => (<SortableItem key={item.id} id={item.id} name={item.title} image={item.image} content={item.content} timeAgo={item.timeAgo}/>))}
+                    {items.map((item) => (
+                      <SortableItem 
+                        key={item.id} 
+                        id={item.id} 
+                        name={item.title} 
+                        image={item.image} 
+                        content={item.content} 
+                        timeAgo={item.timeAgo}
+                        onDelete={handleDeleteItem}
+                      />
+                    ))}
                   </div>
                 </SortableContext>
               </DndContext>
@@ -114,7 +128,7 @@ export default function Manage() {
           <div className="ml-6 mt-6 mr-[26rem] flex justify-center">
             <p className="text-[var(--button-text)] font-bold text-xs">On mobile, only one message will be shown</p>
           </div>
-          <button className="w-[32rem] bg-[var(--button-bg)] text-[var(--button-text)] text-base justify-center gap-2 ml-6 mt-6 p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629]">
+          <button className="w-[32rem] bg-[#bba88c] text-[var(--button-text)] text-base justify-center gap-2 ml-6 mt-6 p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#bba88c]">
             Update
           </button>
         </div>
