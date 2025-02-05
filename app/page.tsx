@@ -26,7 +26,7 @@ export default function Home() {
     const style = `.popsurge-container {
       position: fixed;
       z-index: 2147483647;
-      top: 3rem;
+      top: 5rem;
       right: 1rem;
       max-width: 400px;
       width: 100%;
@@ -132,7 +132,7 @@ export default function Home() {
           "subtitle": "COnsider a career shift",
           "time": "now"
         }
-  
+
       ]
     };
 
@@ -165,7 +165,7 @@ export default function Home() {
       });
     }
     interface Message {
-      imG:string,
+      imG: string,
       title: string;
       subtitle: string;
       time: string;
@@ -175,7 +175,7 @@ export default function Home() {
       const toast = document.createElement('div');
       toast.className = 'popsurge-toast';
 
-      toast.innerHTML =`
+      toast.innerHTML = `
         <div class="toast-content">
             <img src="${message.imG}" alt="icon" class="toast-image">
             <div class="toast-text">
@@ -185,13 +185,13 @@ export default function Home() {
         </div>
         <div class="toast-time">${message.time}</div>
     `;
-     // Auto-remove after 15 seconds
-    setTimeout(() => {
-      toast.classList.add('toast-hide');
+      // Auto-remove after 15 seconds
       setTimeout(() => {
-        toast.remove();
-      }, 300); // Match animation duration
-    },config.toastDuration);
+        toast.classList.add('toast-hide');
+        setTimeout(() => {
+          toast.remove();
+        }, 300); // Match animation duration
+      }, config.toastDuration);
 
       return toast;
     };
@@ -213,8 +213,8 @@ export default function Home() {
       cleanup();
     }
   }, []);
-  
-  
+
+
   const [isCollapsed1, setIsCollapsed] = useState(true);
   const [isCollapsed2, setIsCollapsed2] = useState(false);
   const [isCollapsed3, setIsCollapsed3] = useState(false);
@@ -234,7 +234,7 @@ export default function Home() {
     setIsCollapsed2(!isCollapsed2);
     setIsCollapsed(false);
     setIsCollapsed3(false);
-    
+
   }
   const handleToogle3 = () => {
     setIsCollapsed3(!isCollapsed3);
@@ -274,22 +274,23 @@ export default function Home() {
           </div>
 
           {user ? (
-            <button
-              onClick={() => router.push("/dashboard")}
-              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629] hover:shadow-lg"
-            >
-              <div className="w-6 h-6 bg-[var(--card-light-bg)] text-[var(--button-text)] rounded-full flex items-center justify-center">
-              {user?.email?.charAt(0).toUpperCase() ?? ""}
+            <div className="flex bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629] hover:shadow-lg"
+              onClick={() => {
+                router.push("/dashboard");
+              }}>
+              <div className="w-6 h-6 bg-[var(--card-light-bg)] text-[var(--button-text)] rounded-full flex items-center justify-center mr-2">
+                {user?.email?.charAt(0).toUpperCase() ?? ""}
               </div>
-              {user.email}
-            </button>
+              <div className="flex items-center">{user.email}</div>
+            </div>
           ) : (
-            <button
-              onClick={() => router.push("/signup")}
-              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629] hover:shadow-lg"
-            >
-              Get Started
-            </button>
+           <div className="flex bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629] hover:shadow-lg"
+           onClick={() => {
+              router.push("/signup");
+           }}
+           >
+            Get Started
+            </div>
           )}
         </div>
 
@@ -374,9 +375,9 @@ export default function Home() {
 
             {/* get poopup button */}
             <div className="flex justify-center">
-                <button className="px-20 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
-                  Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
-                </button>
+              <button className="px-20 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
+                Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
+              </button>
             </div>
             <p className="text-center mt-10">
               <FontAwesomeIcon icon={faAngleUp} className="text-xl text-gray-500 mx-2" />
@@ -453,7 +454,7 @@ export default function Home() {
 
           <div className="flex-col mr-10 mt-10">
             <div className="flex  justify-between cursor-pointer"
-            onClick={handleToogle1}
+              onClick={handleToogle1}
             >
               <div className="flex">
                 <p className="text-3xl">✍️</p>
@@ -461,9 +462,9 @@ export default function Home() {
               </div>
               {isCollapsed1 ? (
                 <FontAwesomeIcon icon={faMinus} className="text-xl mt-2 ml-96 transition-transform duration-300 transform rotate-180" />
-                ) : (
+              ) : (
                 <FontAwesomeIcon icon={faPlus} className="text-xl mt-2 ml-96 transition-transform duration-300 transform rotate-0" />
-                )}
+              )}
             </div>
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!isCollapsed1 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"} `}>
               <p className="relative text-xl mt-5">
@@ -473,16 +474,16 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex justify-between mt-14 cursor-pointer"onClick={handleToogle2}>
+            <div className="flex justify-between mt-14 cursor-pointer" onClick={handleToogle2}>
               <div className="flex">
                 <p className="text-3xl">🔗</p>
                 <p className={`font-bold mt-2 text-2xl mx-2 hover:translate-x-2 transition-transform duration-300 ${isCollapsed2 ? "text-[var(--button-bg)]" : "text-[var(--first-slide-text)]"}`}>Add to your site</p>
               </div>
               {isCollapsed2 ? (
                 <FontAwesomeIcon icon={faMinus} className="text-xl mt-2 ml-96 transition-transform duration-300 transform rotate-180" />
-                ) : (
+              ) : (
                 <FontAwesomeIcon icon={faPlus} className="text-xl mt-2 ml-96 transition-transform duration-300 transform rotate-0" />
-                )}
+              )}
             </div>
             <div
               className={`overflow-hidden transition-all duration-300 ease-in-out ${!isCollapsed2 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
@@ -496,16 +497,16 @@ export default function Home() {
 
             <div className="flex justify-between mt-14 cursor-pointer" onClick={handleToogle3}>
               <div className="flex">
-              <p className="text-3xl">
-                <Image src="/icon/icon_color.png" width={50} height={50} alt="Rocket Icon" />
-              </p>
-              <p className={`font-bold mt-2 text-2xl mx-2 hover:translate-x-2 transition-transform duration-300 ${isCollapsed3 ? "text-[var(--button-bg)]" : "text-[var(--first-slide-text)]"}`}>Get more customers</p>
+                <p className="text-3xl">
+                  <Image src="/icon/icon_color.png" width={50} height={50} alt="Rocket Icon" />
+                </p>
+                <p className={`font-bold mt-2 text-2xl mx-2 hover:translate-x-2 transition-transform duration-300 ${isCollapsed3 ? "text-[var(--button-bg)]" : "text-[var(--first-slide-text)]"}`}>Get more customers</p>
               </div>
-                {isCollapsed3 ? (
+              {isCollapsed3 ? (
                 <FontAwesomeIcon icon={faMinus} className="text-xl mt-2 ml-96 transition-transform duration-300 transform rotate-180" />
-                ) : (
+              ) : (
                 <FontAwesomeIcon icon={faPlus} className="text-xl mt-2 ml-96 transition-transform duration-300 transform rotate-0" />
-                )}
+              )}
             </div>
 
             <div
@@ -522,24 +523,24 @@ export default function Home() {
           <div className="bg-[var(--first-slide-bg)]  ">
             <div className="rounded-3xl shadow-lg p-2">
               {isCollapsed1 && (<video
-              src="https://poopup.co/feature_1.mp4"
-              controls
-              autoPlay
-              loop
-              muted
-              className="rounded-3xl w-96 h-96">
+                src="https://poopup.co/feature_1.mp4"
+                controls
+                autoPlay
+                loop
+                muted
+                className="rounded-3xl w-96 h-96">
               </video>)}
               {isCollapsed2 && (
                 <div className="w-96 h-96 flex justify-center items-center">
-                  <Image src="/icon/script.jpg" width={400} height={300} alt="Website Icon"  className="rounded-3xl"/>
-                  </div>
+                  <Image src="/icon/script.jpg" width={400} height={300} alt="Website Icon" className="rounded-3xl" />
+                </div>
               )}
               {isCollapsed3 && (
                 <video src="https://poopup.co/feature_3.mp4" controls autoPlay loop muted className="rounded-3xl w-96 h-96"></video>
               )}
-              
+
             </div>
-            
+
           </div>
 
         </div>
@@ -559,7 +560,7 @@ export default function Home() {
         </div>
 
         <div className="flex bg-[var(--usecase-card)] w-2/3 mx-auto rounded-3xl relative">
-            <div className="border-2 border-[var(--usecase-card)] rounded-3xl">
+          <div className="border-2 border-[var(--usecase-card)] rounded-3xl">
             <div className="flex ">
               <div className="flex flex-col px-10 py-10">
                 <div className="mt-10">
@@ -576,13 +577,13 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex-none">
-                <Image 
-                className="mt-14 shadow-lg rounded-l-lg ml-14 hover:translate-x-2 hover:w-[525px] transition-transform duration-300 hover:w-[525px]"
-                src="/icon/gym.png" width={530} height={400} alt="Gym Icon"/>
-                <Image className="mt-16 shadow-lg rounded-l-lg ml-14 hover:translate-x-2 hover:w-[525px] transition-transform duration-300 hover:w-[525px]" 
-                src="/icon/x.png" width={530} height={400} alt="Gym Icon" />
+                <Image
+                  className="mt-14 shadow-lg rounded-l-lg ml-14 hover:translate-x-2 hover:w-[525px] transition-transform duration-300 hover:w-[525px]"
+                  src="/icon/gym.png" width={530} height={400} alt="Gym Icon" />
+                <Image className="mt-16 shadow-lg rounded-l-lg ml-14 hover:translate-x-2 hover:w-[525px] transition-transform duration-300 hover:w-[525px]"
+                  src="/icon/x.png" width={530} height={400} alt="Gym Icon" />
                 <Image className="mt-14 mb-12 shadow-lg rounded-l-lg ml-14 hover:translate-x-2 hover:w-[525px] transition-transform duration-300 hover:w-[525px]"
-                src="/icon/flag.png" width={530} height={400} alt="Gym Icon" />
+                  src="/icon/flag.png" width={530} height={400} alt="Gym Icon" />
               </div>
             </div>
           </div>
@@ -612,7 +613,7 @@ export default function Home() {
           <Image src="/icon/arrow1.png" width={80} height={80} alt="Arrow Icon" />
         </div>
         <div className="flex justify-center w-2/3 mx-auto p-3 bg-[var(--usecase-card)] rounded-3xl shadow-lg">
-           <YoutubeEmbed videoId="bRnwurfSkSM" />
+          <YoutubeEmbed videoId="bRnwurfSkSM" />
           {/* <video src="https://www.youtube.com/watch?v=bRnwurfSkSM&ab_channel=MarcLou" controls autoPlay className="rounded-3xl w-2/3 h-1/2  bg-[var(--usecase-card)] shadow-xl p-4"> </video> */}
         </div>
 
@@ -650,9 +651,9 @@ export default function Home() {
             </div>
             {/* get poopup button */}
             <div className="flex justify-center">
-                <button className="px-40 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
-                  Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
-                </button>
+              <button className="px-40 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
+                Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
+              </button>
             </div>
             <p className="text-sm text-gray-500 text-center mt-4 mb-6">Pay once. Access forever</p>
           </div>
@@ -684,9 +685,9 @@ export default function Home() {
               </div>
             </div>
             <div className="flex justify-center">
-                <button className="px-40 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
-                  Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
-                </button>
+              <button className="px-40 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
+                Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
+              </button>
             </div>
             <p className="text-sm text-gray-500 text-center mt-4 mb-6">Pay once. Access forever</p>
           </div>
@@ -733,10 +734,10 @@ export default function Home() {
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques2 ? "text-[var(--ocean-green)]" : ""}`}>Is it compatible with?...</p>
                 {ques2 ? (
-                    <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
-                  ) : (
-                    <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
-                  )}
+                  <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
+                ) : (
+                  <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
+                )}
               </div>
             </div>
 
@@ -755,10 +756,10 @@ export default function Home() {
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques3 ? "text-[var(--ocean-green)]" : ""}`}>Do i need to code?</p>
                 {ques3 ? (
-                    <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
-                  ) : (
-                    <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
-                  )}
+                  <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
+                ) : (
+                  <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
+                )}
               </div>
             </div>
 
@@ -777,10 +778,10 @@ export default function Home() {
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques4 ? "text-[var(--ocean-green)]" : ""}`}>Does Poopup work on mobile?</p>
                 {ques4 ? (
-                    <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
-                  ) : (
-                    <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
-                  )}
+                  <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
+                ) : (
+                  <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
+                )}
               </div>
             </div>
 
@@ -797,10 +798,10 @@ export default function Home() {
               <div className="flex justify-between mt-6">
                 <p className={`text-xl font-bold ${ques5 ? "text-[var(--ocean-green)]" : ""}`}>What can I customize?</p>
                 {ques5 ? (
-                    <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
-                  ) : (
-                    <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
-                  )}
+                  <FontAwesomeIcon icon={faMinus} className="text-xl mt-1 transition-transform duration-300 transform rotate-180" />
+                ) : (
+                  <FontAwesomeIcon icon={faPlus} className="text-xl mt-1 transition-transform duration-300 transform rotate-0" />
+                )}
               </div>
             </div>
             <div className={`overflow-hidden transition-all duration-300 ease-in-out ${!ques5 ? "max-h-0 opacity-0" : "max-h-screen opacity-100"
@@ -833,9 +834,9 @@ export default function Home() {
             </p>
             <p className="text-center text-lg mt-10">Don't let your visitors leave without taking action.</p>
             <div className="flex justify-center">
-                <button className="px-20 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
-                  Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
-                </button>
+              <button className="px-20 py-4 bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] mt-10 hover:scale-102 flex items-center justify-center group">
+                Get PoopUp <FontAwesomeIcon icon={faArrowRight} className="ml-2 transition-transform duration-300 group-hover:scale-105 group-hover:translate-x-1" />
+              </button>
             </div>
           </div>
         </div>
@@ -858,7 +859,7 @@ export default function Home() {
           </div>
           <div className="flex-col">
             <p className="font-bold text-[var(--footer-text)] ">LINKS</p>
-            <p><a onClick={()=>router.push("/login")}>login</a></p>
+            <p><a onClick={() => router.push("/login")}>login</a></p>
             <a href="#price">Pricing</a>
           </div>
           <div className="flex-col">
