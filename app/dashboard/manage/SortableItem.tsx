@@ -2,6 +2,9 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { faFloppyDisk, faLink, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from 'react';
 
 interface SortableItemProps {
     id: string;
@@ -9,6 +12,7 @@ interface SortableItemProps {
     image: string;
     content: string;
     timeAgo: string;
+    url: string;
     onDelete: (id: string) => void;
 }
 
@@ -17,10 +21,12 @@ export default function SortableItem({
     name, 
     image, 
     content, 
-    timeAgo, 
+    timeAgo,
+    url,
     onDelete 
 }: SortableItemProps) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+    const [isUrlInputVisible, setIsUrlInputVisible] = useState(false);
 
     return (
         <div 
@@ -34,7 +40,7 @@ export default function SortableItem({
         >
             <div 
                 {...listeners} 
-                className="ml-2 mr-6 grid grid-cols-2 gap-x-2 gap-y-1 cursor-grab active:cursor-grabbing"
+                className="ml-2 mr-6 grid grid-cols-2 gap-x-1 gap-y-1 cursor-grab active:cursor-grabbing"
             >
                 <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
                 <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
@@ -45,35 +51,58 @@ export default function SortableItem({
             </div>
             <div className="flex-shrink-0 mr-4">
                 <input type="file" className="hidden" id={`upload-${id}`}/>
-                <label htmlFor={`upload-${id}`} className="relative">
-                    <img src={image} className="w-12 h-12 text-[var(--first-slide-text)] object-cover rounded-lg cursor-pointer text-sm" />
-                    {!image && (<i className="fas fa-camera absolute inset-0 flex items-center justify-center text-[var(--first-slide-text)] text-xl"></i>)}
+                <label htmlFor={`upload-${id}`}>
+                    <img src={image} className="w-12 h-12 rounded-lg cursor-pointer" />
                 </label>
             </div>
             <div className="flex-grow">
+                {isUrlInputVisible && (
+                    <div className="mb-2 mr-6">
+                        <input 
+                            type="text" 
+                            defaultValue={url}
+                            placeholder="poopup.co"
+                            className="w-full bg-[--first-slide-bg] text-gray-800 px-2 py-1 rounded-lg text-sm"
+                        />
+                    </div>
+                )}
+                <div className="flex items-center gap-2">
+                    <input 
+                        type="text"
+                        defaultValue={name}
+                        placeholder="Angry Customer #32" 
+                        className={`w-full bg-[--first-slide-bg] text-gray-800 px-2 py-1 rounded-lg mb-1 mr-6 text-sm font-bold`}
+                    />
+                    <a 
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsUrlInputVisible(!isUrlInputVisible);
+                        }}
+                        className="absolute top-5 right-16 text-xs"
+                    >
+                    <FontAwesomeIcon icon={isUrlInputVisible ? faFloppyDisk : faLink} className="text-[var(--button-text)]"/>
+                    </a>
+                </div>
                 <input 
                     type="text" 
-                    defaultValue={name} 
-                    className={`w-full bg-[--first-slide-bg] text-[var(--first-slide-text)] p-1 rounded-lg mb-1 text-sm font-bold focus:outline-none border ${!name ? 'border-gray-300' : 'border-transparent'} focus:border-gray-300`}
-                />
-                <input 
-                    type="text" 
-                    defaultValue={content} 
-                    className={`w-full bg-[--first-slide-bg] text-[var(--first-slide-text)] p-1 rounded-lg text-sm focus:outline-none border ${!content ? 'border-gray-300' : 'border-transparent'} focus:border-gray-300`}
+                    defaultValue={content}
+                    placeholder="WHERE IS MY REFUND?!" 
+                    className={`w-full bg-[--first-slide-bg] text-gray-800 px-2 py-1 rounded-lg text-sm`}
                 />
             </div>
             <div className="ml-2 mb-auto flex items-center">
                 <input 
                     type="text" 
                     defaultValue={timeAgo} 
-                    className={`w-10 bg-[--first-slide-bg] text-[var(--first-slide-text)] text-right p-1 rounded-lg text-xs focus:outline-none border ${!timeAgo ? 'border-gray-300' : 'border-transparent'} focus:border-gray-300`}
+                    placeholder="now" 
+                    className={`w-10 bg-[--first-slide-bg] text-gray-600 text-right px-2 py-1 rounded-lg text-xs`}
                 />
                 <button 
                     onClick={() => onDelete(id)}
-                    className="absolute bottom-6 right-4 text-red-400 text-xs hover:text-red-600 transition-colors duration-200"
+                    className="absolute bottom-5 right-6 text-xs"
                     aria-label="Delete notification"
                 >
-                    Delete
+                <FontAwesomeIcon icon={faTrashCan} className="text-[var(--button-text)]" />
                 </button>
             </div>
         </div>
