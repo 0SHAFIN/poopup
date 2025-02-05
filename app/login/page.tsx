@@ -1,15 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../../lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import {faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [passType, setPassType] = useState("password");
+
+  const handleShowPass=()=>{
+    setShowPassword(!showPassword);
+    if(showPassword){
+      setPassType("password");
+    }
+    else{
+      setPassType("text");
+    }
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +36,7 @@ const LoginPage: React.FC = () => {
       setError(err.message || "Failed to log in.");
     }
   };
+
 
   return (
 <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
@@ -36,14 +51,24 @@ const LoginPage: React.FC = () => {
         className="w-full p-2 rounded-lg bg-gray-700 mb-6"
         required
       />
-      <input
-        type="password"
-        placeholder="Enter your password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 rounded-lg bg-gray-700 mb-6"
-        required
-      />
+
+        <div className="relative">
+          <input
+            type={passType}
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-2 rounded-lg bg-gray-700 relative mb-2"
+            required
+          />
+          <FontAwesomeIcon onClick={handleShowPass} icon={showPassword?faEye:faEyeSlash } className="text-gray-400 absolute right-3 top-3 cursor-pointer"/>
+        </div>
+ 
+      <div className="flex justify-end mb-5">
+        <a href="/forgot-password" className="text-[var(--button-bg)] text-sm hover:underline">
+          Forgot password?
+        </a>
+      </div>
       <button
         type="submit"
         className="w-full bg-[var(--button-bg)] hover:bg-[#FFA629] p-2 rounded-lg text-[var(--button-text)] font-bold"
@@ -52,17 +77,12 @@ const LoginPage: React.FC = () => {
       </button>
       {error && <p className="mt-4 text-red-500">{error}</p>}
     </form>
-    <p className="text-sm text-gray-400 mt-4 flex justify-between">
-      <span>
-        No account?{" "}
+    <div className="text-sm text-gray-400 mt-4 flex justify-center">
+        <p className="mr-3">Don't have an account?</p>
         <a href="/signup" className="text-[var(--button-bg)] hover:underline">
           Sign up
         </a>
-      </span>
-      <a href="/forgot-password" className="text-[var(--button-bg)] hover:underline">
-        Forgot password?
-      </a>
-    </p>
+    </div>
   </div>
 </div>
 
