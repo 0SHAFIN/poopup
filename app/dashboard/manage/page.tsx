@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faArrowLeft, faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faArrowLeft, faTimes, faPlus, faChartSimple } from '@fortawesome/free-solid-svg-icons';
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
@@ -16,6 +16,7 @@ const initialItems = [
         title: "Notification 1",
         content: "This is the first notification",
         timeAgo: "now",
+        url: "test.co",
     },
     {
         id: "2",
@@ -23,6 +24,7 @@ const initialItems = [
         title: "Notification 2",
         content: "This is the second notification",
         timeAgo: "2m",
+        url: "test.co",
     },
 ];
 
@@ -83,9 +85,15 @@ export default function Manage() {
             <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm px-3 py-2 rounded-xl" />
             <p className="text-[var(--button-text)] font-medium text-sm mt-8 font-semibold">Hide message after (ms)</p>
             <input type="text" className="w-[24rem] mt-4 bg-[var(--first-slide-bg)] text-[var(--button-text)] font-semibold text-sm px-3 py-2 rounded-xl" />
-            <button className="w-[24rem] bg-[#bba88c] text-[var(--button-text)] text-base justify-center gap-2 mt-16 p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#bba88c ]">
+            <button className="w-[24rem] bg-[#dbc4b0] text-[#958373] text-base justify-center gap-2 mt-16 p-3 px-5 rounded-3xl font-bold">
               Update
             </button>
+            <div className="flex justify-center w-[24rem]">
+              <button className={`bg-[var(--button-bg)] text-[var(--button-text)] text-sm mt-8 p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#FFA629] flex items-center gap-2`}>
+              <FontAwesomeIcon icon={faChartSimple} className="text-[var(--button-text)]" />
+              Analytics
+              </button>
+            </div>
           </div>
         </div>
         
@@ -103,6 +111,7 @@ export default function Manage() {
                         image={item.image} 
                         content={item.content} 
                         timeAgo={item.timeAgo}
+                        url={item.url}
                         onDelete={handleDeleteItem}
                       />
                     ))}
@@ -128,7 +137,7 @@ export default function Manage() {
           <div className="ml-6 mt-6 mr-[26rem] flex justify-center">
             <p className="text-[var(--button-text)] font-bold text-xs">On mobile, only one message will be shown</p>
           </div>
-          <button className="w-[32rem] bg-[#bba88c] text-[var(--button-text)] text-base justify-center gap-2 ml-6 mt-6 p-3 px-5 rounded-3xl font-bold hover:shadow-lg transition-transform duration-300 hover:bg-[#bba88c]">
+          <button className="w-[32rem] bg-[#dbc4b0] text-[#958373] text-base justify-center gap-2 ml-6 mt-6 p-3 px-5 rounded-3xl font-bold">
             Update
           </button>
         </div>
