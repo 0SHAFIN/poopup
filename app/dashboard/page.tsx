@@ -7,6 +7,7 @@ import { signOut, onAuthStateChanged, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import Image from "next/image";
 
 export default function Dashboard() {
   const [isAccountOpen, setIsAccountOpen] = useState(false);
@@ -36,7 +37,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[--usecase-card] flex flex-col">
       {/* Header with Increased Padding */}
-      <header className="bg-[--first-slide-bg] py-4 px-96">
+      <header className="bg-[--first-slide-bg] py-4 px-[26rem]">
         <div className="flex justify-between items-center">
           
           {/* Account Button with Dropdown */}
@@ -46,7 +47,11 @@ export default function Dashboard() {
               className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629] flex items-center gap-2"
             >
               {user ? (
-              <span>{user.email} {" "} </span>
+                <>
+                  <div className="w-6 h-6 bg-[var(--card-light-bg)] text-[var(--button-text)] rounded-full flex items-center justify-center">
+                    {user?.email?.charAt(0).toUpperCase() ?? ""}
+                  </div><span>{user.email} {" "} </span>
+                </>
               ) : (
               <span>Account</span>
               )}
@@ -58,7 +63,7 @@ export default function Dashboard() {
             </button>
             
             {isAccountOpen && (
-                      <div className="absolute bg-[--first-slide-bg] right-0 mt-2 w-40 rounded-3xl shadow-lg py-2 z-50">
+                      <div className="absolute bg-[--first-slide-bg] right-0 mt-4 w-36 rounded-3xl shadow-lg py-2 z-50">
                         <button className="w-full px-3 py-2 text-left hover:bg-[--card-light-bg] flex items-center gap-2 rounded-lg font-semibold text-sm">
                           <CreditCard className="w-4 h-4" />
                           <span>Billing</span>
@@ -80,13 +85,42 @@ export default function Dashboard() {
           </button>
         </div>
       </header>
-      <div className="">
-        <div className="mr-auto ml-96 mt-16 text-[var(--first-slide-text)] font-extrabold text-xl">
-          0 PoopUps
+      <div className="flex row">
+        <div className="flex-grow ml-[26rem] mr-8 mt-16 text-[var(--first-slide-text)] font-extrabold text-xl">
+          3 PoopUps
           {/* PoopUps */}
+            <div className="grid grid-cols-2 gap-6 mt-8">
+              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-5 min-w-[300px]">
+                <div className="flex items-center gap-2">
+                  <Image src="/icon/poopxd.png" width={28} height={28} alt="Site Logo" />
+                    <h2 className="text-[var(--first-slide-text)] text-base font-semibold">poopup.co</h2>
+                </div>
+                <p className="text-[var(--first-slide-text)] text-xs font-semibold ml-9">
+                0 visitors in last 24 hours
+                </p>
+              </div>
+              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-5 min-w-[300px]">
+                <div className="flex items-center gap-2">
+                  <Image src="/icon/poopxd.png" width={28} height={28} alt="Site Logo" />
+                    <h2 className="text-[var(--first-slide-text)] text-base font-semibold">poopup.co</h2>
+                </div>
+                <p className="text-[var(--first-slide-text)] text-xs font-semibold ml-9">
+                0 visitors in last 24 hours
+                </p>
+              </div>
+              <div className="sitecard bg-[var(--first-slide-bg)] rounded-[36px] shadow-sm px-8 py-5 min-w-[300px]">
+                <div className="flex items-center gap-2">
+                  <Image src="/icon/poopxd.png" width={28} height={28} alt="Site Logo" />
+                    <h2 className="text-[var(--first-slide-text)] text-base font-semibold">poopup.co</h2>
+                </div>
+                <p className="text-[var(--first-slide-text)] text-xs font-semibold ml-9">
+                0 visitors in last 24 hours
+                </p>
+              </div>
+            </div>
         </div>
         {/* Main Content */}
-        <div className="w-80 bg-[var(--first-slide-bg)] ml-auto mr-96 rounded-3xl shadow-sm p-8">
+        <div className="flex-grow-0 w-80 bg-[var(--first-slide-bg)] ml-6 mt-16 mr-[26rem] rounded-3xl shadow-sm p-8 min-w-[300px]">
           <div className="space-y-8">
             <div className="space-y-2">
               <h2 className="text-[var(--first-slide-text)] text-lg font-semibold">Fancy a new PoopUp?</h2>

@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../lib/firebase";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ForgotPasswordPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -16,10 +18,21 @@ const ForgotPasswordPage: React.FC = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage("Password reset email sent! Check your inbox.");
+      toast.success("Password reset email sent! Check your inbox.");  // Success message
     } catch (err: any) {
       setError(err.message || "Something went wrong.");
     }
   };
+
+  // Trigger toast notification when error changes
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: "bottom-right",
+        
+      });
+    }
+  }, [error]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
@@ -38,15 +51,14 @@ const ForgotPasswordPage: React.FC = () => {
         >
           Reset Email
         </button>
-        <p className="text-sm text-gray-400 mt-4">
-          Back to Login{" "}
+        <div className="text-sm text-gray-400 mt-4 flex justify-center">
+          <p className="mr-3">Back to Login</p>
           <a href="/login" className="text-[var(--button-bg)] hover:underline">
-            Log in
+            Login
           </a>
-        </p>
-        {message && <p className="mt-4 text-green-500">{message}</p>}
-        {error && <p className="mt-4 text-red-500">{error}</p>}
+        </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

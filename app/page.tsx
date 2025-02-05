@@ -11,6 +11,8 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { on } from "events";
 
+
+
 export default function Home() {
   const [imageSrc, setImageSrc] = useState("/icon/icon_bw.png"); // Default image source
   const [hoverActivated, setHoverActivated] = useState(false); // Default hover state
@@ -253,8 +255,11 @@ export default function Home() {
           {user ? (
             <button
               onClick={() => router.push("/dashboard")}
-              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629]"
+              className="bg-[var(--button-bg)] text-[var(--button-text)] text-sm p-3 px-5 rounded-3xl font-bold transition-transform duration-300 hover:bg-[#FFA629] flex items-center gap-2"
             >
+              <div className="w-6 h-6 bg-[var(--card-light-bg)] text-[var(--button-text)] rounded-full flex items-center justify-center">
+              {user?.email?.charAt(0).toUpperCase() ?? ""}
+              </div>
               {user.email}
             </button>
           ) : (
